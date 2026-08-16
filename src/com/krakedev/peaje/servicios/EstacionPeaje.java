@@ -1,5 +1,10 @@
 package com.krakedev.peaje.servicios;
 
+import com.krakedev.peaje.entidades.Conductor;
+import com.krakedev.peaje.entidades.TagElectronico;
+import com.krakedev.peaje.entidades.Vehiculo;
+import com.krakedev.peaje.util.ValidadorUtil;
+
 public class EstacionPeaje {
 	private int codigoEstacion = 500;
 	private double tarifaLiviano = 1.00;
@@ -31,6 +36,25 @@ public class EstacionPeaje {
 
 	public void setTarifaPesado(double tarifaPesado) {
 		this.tarifaPesado = tarifaPesado;
+	}
+	public Vehiculo registrarVehiculo(String placa, String tipo, String cedula, String nombre, String apellido, String idTag) {
+	    ValidadorUtil validador = new ValidadorUtil();
+
+	    if (validador.esTipoValido(tipo)) {
+	        Vehiculo vehiculo = new Vehiculo(placa);
+	        vehiculo.setTipo(tipo);
+
+	        Conductor conductor = new Conductor(cedula, nombre, apellido);
+	        vehiculo.setPropietario(conductor);
+
+	        TagElectronico tag = new TagElectronico(idTag);
+	        vehiculo.setTag(tag);
+
+	        return vehiculo;
+	    } else {
+	        System.out.println("Tipo de vehículo inválido");
+	        return null;
+	    }
 	}
 	
 }
