@@ -40,7 +40,7 @@ public class Conductor {
     }
 
     public void imprimir() {
-        System.out.println("Cédula: " + cedula);
+        System.out.println("Cedula: " + cedula);
         System.out.println("Nombre: " + nombre + " " + apellido);
     }
 }
