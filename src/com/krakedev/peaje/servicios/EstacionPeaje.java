@@ -85,4 +85,15 @@ public class EstacionPeaje {
 	        System.out.println("Saldo insuficiente");
 	    }
 	}
+	public void transferirSaldoTag(TagElectronico origen, TagElectronico destino, double monto) {
+	    if (origen.getSaldo() >= monto) {
+	        double nuevoSaldoOrigen = origen.getSaldo() - monto;
+	        origen.setSaldo(nuevoSaldoOrigen);
+
+	        double nuevoSaldoDestino = destino.getSaldo() + monto;
+	        destino.setSaldo(nuevoSaldoDestino);
+	    } else {
+	        System.out.println("Saldo insuficiente en el tag origen");
+	    }
+	}
 }
