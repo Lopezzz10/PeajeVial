@@ -68,12 +68,19 @@ public class EstacionPeaje {
 	}
 	
 	public void cobrarPeaje(Vehiculo vehiculo) {
+	    ValidadorUtil validador = new ValidadorUtil();
+
 	    double tarifa;
 
 	    if (vehiculo.getTipo().equals("L")) {
 	        tarifa = tarifaLiviano;
 	    } else {
 	        tarifa = tarifaPesado;
+	    }
+
+	    if (!validador.esMontoValido(tarifa)) {
+	        System.out.println("Tarifa inválida");
+	        return;
 	    }
 
 	    TagElectronico tag = vehiculo.getTag();
@@ -86,6 +93,13 @@ public class EstacionPeaje {
 	    }
 	}
 	public void transferirSaldoTag(TagElectronico origen, TagElectronico destino, double monto) {
+	    ValidadorUtil validador = new ValidadorUtil();
+
+	    if (!validador.esMontoValido(monto)) {
+	        System.out.println("Monto inválido");
+	        return;
+	    }
+
 	    if (origen.getSaldo() >= monto) {
 	        double nuevoSaldoOrigen = origen.getSaldo() - monto;
 	        origen.setSaldo(nuevoSaldoOrigen);
